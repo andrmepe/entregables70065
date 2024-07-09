@@ -37,4 +37,17 @@ POST /api/products: Crear un nuevo producto.
 PUT /api/products/:pid: Actualizar un producto existente.
 DELETE /api/products/:pid: Eliminar un producto específico.
 
-![nube AWS] (./image.png)
+![imagen](src/assets/image.png)
+
+![imagen](src/assets/image(1).png)
+
+![imagen](src/assets/image(2).png)
+
+![imagen](src/assets/image(3).png)
+
+![imagen](src/assets/image(4).png)
+
+![imagen](src/assets/image(5).png)
+
+![imagen](src/assets/image(6).png)
+
