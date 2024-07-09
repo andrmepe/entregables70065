@@ -1,24 +1,79 @@
 [
-    {
-      "id": 1,
-      "title": "carpart1",
-      "description": "carpart1 toyota",
-      "code": "CAR1",
-      "price": 2500,
-      "status": true,
-      "stock": 10,
-      "category": "Car",
-      "thumbnails": ""
-    },
-    {
-      "id": 2,
-      "title": "carpart2",
-      "description": "carpart2 Hyundai",
-      "code": "CAR1",
-      "price": 800,
-      "status": true,
-      "stock": 5,
-      "category": "Car",
-      "thumbnails": ""
-    }
-  ]
+  {
+    "id": 1,
+    "title": "Producto Actualizado",
+    "description": "carpart1 toyota",
+    "code": "CAR1",
+    "price": 1999,
+    "status": true,
+    "stock": 10,
+    "category": "Car",
+    "thumbnails": ""
+  },
+  {
+    "id": 2,
+    "title": "carpart2",
+    "description": "carpart2 Hyundai",
+    "code": "CAR1",
+    "price": 800,
+    "status": true,
+    "stock": 5,
+    "category": "Car",
+    "thumbnails": ""
+  },
+  {
+    "id": 3,
+    "title": "carpart3",
+    "description": "carpart3 Renault",
+    "code": "CAR3",
+    "price": 1200,
+    "status": true,
+    "stock": 8,
+    "category": "Car",
+    "thumbnails": ""
+  },
+  {
+    "id": 4,
+    "title": "Dynamic Factors Analyst",
+    "description": "Global",
+    "code": "Intelligent",
+    "price": 168.59,
+    "status": true,
+    "stock": 8,
+    "category": "Technician",
+    "thumbnails": ""
+  },
+  {
+    "id": 5,
+    "title": "Lead Accountability Analyst",
+    "description": "Corporate",
+    "code": "Intelligent",
+    "price": 176.33,
+    "status": true,
+    "stock": 8,
+    "category": "Director",
+    "thumbnails": ""
+  },
+  {
+    "id": 6,
+    "title": "Future Group Designer",
+    "description": "Customer",
+    "code": "Unbranded",
+    "price": 698.14,
+    "status": true,
+    "stock": 8,
+    "category": "Administrator",
+    "thumbnails": ""
+  },
+  {
+    "id": 7,
+    "title": "Lead Security Executive",
+    "description": "Senior",
+    "code": "Refined",
+    "price": 43.38,
+    "status": true,
+    "stock": 8,
+    "category": "Officer",
+    "thumbnails": ""
+  }
+]

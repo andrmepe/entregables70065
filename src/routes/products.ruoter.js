@@ -17,7 +17,7 @@ router.get('/:pid', (req, res) => {
     if (product) {
         res.status(200).json(product);
     } else {
-        res.status(404).json({ msg: "Producto no encontrado" });
+        res.status(404).json({ msg: "Producto buscado no se encontro" });
     }
 });
 
@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     const { title, description, code, price, status, stock, category, thumbnails } = req.body;
     let maxIdProds = products.reduce((max, product) => product.id > max ? product.id : max, 0 )
     if (!title || !description || !code || price <= 0 || stock <= 0 || !category){
-        res.status(400).json({ msg: "Revisar la información del producto" })
+        res.status(400).json({ msg: "error, verificar la info solicitada" })
     } else {
     const newProduct = {
         id: maxIdProds + 1,
@@ -63,14 +63,14 @@ router.put('/:pid', (req, res) => {
         storeProducts(products);
         res.json(product);
     } else {
-        res.status(404).json({ msg: `Producto no encontrado` });
+        res.status(404).json({ msg: `Producto buscado no se encontro` });
     }
 });
 
 router.delete('/:pid', (req, res) => {
     const prodId = parseInt(req.params.pid);
     products = products.filter((product) => product.id !== prodId);
-    res.status(200).json({ msg: `Producto con id: ${prodId}, eliminado correctamente` });
+    res.status(200).json({ msg: `El Producto con id: ${prodId}, ha sido eliminado exitodsamente` });
 });
 
 module.exports = router;

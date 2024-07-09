@@ -20,7 +20,7 @@ router.get('/:cid', (req, res) => {
     if (cart) {
         res.status(200).json(cart);
     } else {
-        res.status(404).json({ msg: "Carrito no encontrado" });
+        res.status(404).json({ msg: "Lo sentimos, Carrito no encontrado" });
     }
 });
 
@@ -45,11 +45,11 @@ router.delete('/:cid/product/:pid', (req, res) => {
     const prodId = parseInt(req.params.pid);
     const cart = carts.find(cart => cart.id === cartId);
     if (!cart) {
-        return res.status(404).json({ msg: `Carrito con id: ${cartId} no encontrado` });
+        return res.status(404).json({ msg: `El car id: ${cartId} no se encontro` });
     }
     cart.products = cart.products.filter(product => product.id !== prodId);
     
-    res.status(200).json({ msg: `Producto con id: ${prodId} eliminado del carrito con id: ${cartId} correctamente` });
+    res.status(200).json({ msg: `el product id: ${prodId} ha sido eliminado del carrito con id: ${cartId} exitosamente` });
     carts.push(cart.products);
     storeCarts(carts);
     
