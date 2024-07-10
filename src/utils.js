@@ -4,7 +4,7 @@ const path = require('path');
 const cartsFilePath = path.join(__dirname, 'data', 'carts.json');
 const productsFilePath = path.join(__dirname, 'data', 'products.json');
 
-// Inicializar el archivo de carritos
+// Cart file
 const loadCarts = () => {
     if (!fs.existsSync(cartsFilePath)) {
         fs.writeFileSync(cartsFilePath, JSON.stringify([]));
@@ -18,7 +18,7 @@ const storeCarts = (carts) => {
     fs.writeFileSync(cartsFilePath, data);
 };
 
-// Inicializar el archivo de productos
+// Product file
 const loadProducts = () => {
     if (!fs.existsSync(productsFilePath)) {
         fs.writeFileSync(productsFilePath, JSON.stringify([]));
