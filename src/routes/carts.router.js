@@ -51,7 +51,7 @@ router.delete('/:cid/product/:pid', (req, res) => {
     }
     cart.products = cart.products.filter(product => product.id !== prodId);
     
-    res.status(200).json({ msg: `Product id: ${prodId} has been successfully removed from cart id: ${cartId} ` });
+    res.status(200).json({ msg: `Product with id: ${prodId} has been successfully removed from cart id: ${cartId} ` });
     carts.push(cart.products);
     storeCarts(carts);
     

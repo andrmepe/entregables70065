@@ -76,7 +76,7 @@ router.put('/:pid', (req, res) => {
 router.delete('/:pid', (req, res) => {
     const prodId = parseInt(req.params.pid);
     products = products.filter((product) => product.id !== prodId);
-    res.status(200).json({ msg: `Product with id: ${prodId}, has been successfully deleted` });
+    res.status(200).json({ msg: ` Product with id: ${prodId}, has been successfully deleted` });
 });
 
 module.exports = router;
