@@ -1,7 +1,7 @@
 # Entregable Uno: E-commerce Carrito y Productos
 Este proyecto es parte del entregable uno de un sistema de e-commerce que gestiona carritos de compras y productos mediante una API RESTful utilizando Node.js y Express.
 
-## Descripción
+## Proyect Descripción 
 El proyecto consiste en una aplicación que permite gestionar carritos de compras y productos mediante operaciones CRUD (Crear, Leer, Actualizar, Eliminar) a través de endpoints dedicados.
 
 ## Características Principales
