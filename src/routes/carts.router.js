@@ -1,61 +1,76 @@
-const express = require("express");
-const router = express.Router();
-const { loadCarts, storeCarts } = require('../utils.js');
-const path = require ('path')
+import { Router } from "express";
+import { loadCarts, storeCarts } from '../utils.js'
 
-// Load initial cart data from file
-loadCarts()
+const router = Router();
+let carts = [];
 
-let carts = loadCarts();
+// Initial load of carts asynchronously
+const loadCartsData = async () => {
+    carts = await loadCarts();
+};
 
-const cartsFilePath = path.join(__dirname, '../data', 'carts.json');
+loadCartsData().then(() => {
+    router.get('/', (req, res) => {
+        res.status(200).json(carts);
+    });
 
-router.get('/', (req, res) => {
-    res.status(200).json(carts);
+    router.get('/:cid', (req, res) => {
+        const cartId = parseInt(req.params.cid, 10);
+        const cart = carts.find(c => c.id === cartId);
+        if (cart) {
+            res.status(200).json(cart);
+        } else {
+            res.status(404).json({ msg: "Cart not found" });
+        }
+    });
+
+    router.post('/', (req, res) => {
+        const { products } = req.body;
+        const maxIdCarts = carts.reduce((max, cart) => Math.max(max, cart.id), 0);
+        const newCart = {
+            id: maxIdCarts + 1,
+            products: products || []
+        };
+        carts.push(newCart);
+        storeCarts(carts);
+        res.status(201).json(newCart);
+    });
+
+    router.post('/:cid/product/:pid', async (req, res) => {
+        const cartId = parseInt(req.params.cid, 10);
+        const prodId = parseInt(req.params.pid, 10);
+        let quantity = parseInt(req.body.quantity, 10) || 1;
+
+        const cart = carts.find(cart => cart.id === cartId);
+        if (!cart) {
+            return res.status(404).json({ msg: `Cart with id: ${cartId} not found` });
+        }
+
+        const productInCart = cart.products.find(product => product.id === prodId);
+        if (!productInCart) {
+            return res.status(404).json({ msg: `Product with id: ${prodId} not found in the cart` });
+        }
+
+        productInCart.quantity += quantity;
+        try {
+            await storeCarts(carts);
+            res.status(200).json({ msg: `Product with id: ${prodId} updated successfully, added quantity: ${quantity}` });
+        } catch (error) {
+            res.status(500).json({ msg: 'Error saving changes to the cart', error: error.message });
+        }
+    });
+
+    router.delete('/:cid/product/:pid', (req, res) => {
+        const cartId = parseInt(req.params.cid, 10);
+        const prodId = parseInt(req.params.pid, 10);
+        const cart = carts.find(cart => cart.id === cartId);
+        if (!cart) {
+            return res.status(404).json({ msg: `Cart with id: ${cartId} not found` });
+        }
+        cart.products = cart.products.filter(product => product.id !== prodId);
+        storeCarts(carts);
+        res.status(200).json({ msg: `Product with id: ${prodId} removed from the cart with id: ${cartId} successfully` });
+    });
 });
 
-router.get('/:cid', (req, res) => {
-    const cartId = parseInt(req.params.cid);
-    const cart = carts.find((cart) => cart.id === cartId);
-    if (cart) {
-        res.status(200).json(cart);
-    } else {
-        res.status(404).json({ msg: "Sorry, cart not found" });
-    }
-});
-
-router.post('/', (req, res) => {
-    const { products } = req.body;
-    let maxIdCarts = 0;
-    if (carts.length > 0) {
-        maxIdCarts = carts.reduce((max, cart) => cart.id > max ? cart.id : max, 0);
-    }
-    const newCart = {
-        id: maxIdCarts + 1,
-        products: products || []
-    };
-
-    // Add the new cart to the list of carts
-    carts.push(newCart);
-    storeCarts(carts); // Save the updated carts data to file
-    res.status(201).json(newCart);
-});
-
-// Route to delete a product from a cart by cart ID and product ID
-router.delete('/:cid/product/:pid', (req, res) => {
-    const cartId = parseInt(req.params.cid);
-    const prodId = parseInt(req.params.pid);
-    const cart = carts.find(cart => cart.id === cartId);
-    if (!cart) {
-        return res.status(404).json({ msg: `Cart id: ${cartId} not found` });
-    }
-    cart.products = cart.products.filter(product => product.id !== prodId);
-    
-    res.status(200).json({ msg: `Product with id: ${prodId} has been successfully removed from cart id: ${cartId} ` });
-    carts.push(cart.products);
-    storeCarts(carts);
-    
-});
-
-
-module.exports = router;
+export default router;
