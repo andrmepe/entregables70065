@@ -2,17 +2,17 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { promises as fs } from 'fs';
 
-// Obtiene la ruta completa del archivo actual
+// Gets the full path of the current file
 const __filename = fileURLToPath(import.meta.url);
 
-// Obtiene el directorio donde se encuentra el archivo actual
+// Gets the directory where the current file is located
 const __dirname = dirname(__filename);
 
 // Definición de las rutas de archivos
 const cartsFilePath = join(__dirname, '../../carts.json');
 const productsFilePath = join(__dirname, '../../products.json');
 
-// Función para inicializar el archivo de carritos si no existe
+// Function to initialize the carts file if it does not exist
 const setupCartsFile = async () => {
     try {
         try {
@@ -30,7 +30,7 @@ const setupCartsFile = async () => {
     }
 };
 
-// Función para cargar los carritos desde el archivo
+// Function to load carts from the file
 const loadCarts = async () => {
     try {
         await setupCartsFile();
@@ -42,7 +42,7 @@ const loadCarts = async () => {
     }
 };
 
-// Función para guardar los carritos en el archivo
+// Function to save carts to the file
 const storeCarts = async (carts) => {
     const data = JSON.stringify(carts, null, 2);
     try {
@@ -53,7 +53,7 @@ const storeCarts = async (carts) => {
     }
 };
 
-// Función para inicializar el archivo de productos si no existe
+// Function to initialize the products file if it does not exist
 const initializeProductsFile = async () => {
     try {
         try {
@@ -71,7 +71,7 @@ const initializeProductsFile = async () => {
     }
 };
 
-// Función para cargar los productos desde el archivo
+// Function to load products from the file
 const loadProducts = async () => {
     try {
         await initializeProductsFile();
@@ -83,7 +83,7 @@ const loadProducts = async () => {
     }
 };
 
-// Función para guardar los productos en el archivo
+// Function to save products to the file
 const storeProducts = async (products) => {
     const data = JSON.stringify(products, null, 2);
     try {

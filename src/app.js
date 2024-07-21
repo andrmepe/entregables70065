@@ -22,7 +22,7 @@ app.set('views', __dirname + "/views") //TODO
 app.set('view engine', 'handlebars')
 app.use(express.static(path.join(__dirname + '/public')))
 
-// Routers
+//Routers
 app.use('/', viewsRouter)
 app.use("/api/carts", cartsRouter)
 
