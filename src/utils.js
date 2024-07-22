@@ -94,9 +94,5 @@ const storeProducts = async (products) => {
     }
 };
 
-export { 
-    __dirname, 
-    loadCarts, 
-    storeCarts, 
-    loadProducts, 
-    storeProducts };
+export default __dirname;
+export { loadCarts, storeCarts, loadProducts, storeProducts };

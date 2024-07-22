@@ -1,6 +1,6 @@
-const express = require("express")
-const cartsRouter = require("./routes/carts.router.js")
-const productsRouter = require("./routes/products.ruoter.js")
+import express from "express"
+import cartsRouter from "./routes/carts.router.js" 
+import productsRouter from "./routes/products.ruoter.js"
 import handlebars from 'express-handlebars'
 import path from 'path'
 import { Server } from 'socket.io';

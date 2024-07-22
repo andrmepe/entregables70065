@@ -1,5 +1,5 @@
 import { Router } from "express";
-const {  loadProducts, storeProducts } = require('../utils.js');
+import { loadProducts, storeProducts } from "../utils.js";
 
 const router = Router();
 let products = [];
