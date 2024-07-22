@@ -4,13 +4,13 @@ import productsRouter from "./routes/products.ruoter.js"
 import handlebars from 'express-handlebars'
 import path from 'path'
 import { Server } from 'socket.io';
-// import http from 'http';
+import http from 'http';
 import __dirname from './utils.js'
 import viewsRouter from "./routes/views.router.js"
 
 
 const app = express()
-const PORT = 8080
+const PORT = 8081
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -26,26 +26,26 @@ app.use(express.static(path.join(__dirname + '/public')))
 app.use('/', viewsRouter)
 app.use("/api/carts", cartsRouter)
 
-const httpServer = app.listen(PORT, ()=> console.log(`server running on PORT ${PORT}`)) // OPCION CA
+const httpServer = http.createServer(app)
 
 const socketServer = new Server(httpServer)
 
 let products = []
 
-socketServer.on('connection', socketServer=>{ // OPCION CA
+socketServer.on('connection', socket=>{ // OPCION CA
     console.log('Nuevo cliente conectado')
 
     socket.on('info', data => {
         console.log(`the new data is ${data}`);
     });
-
+// to Received product data
     socket.on('productData', data => {
-        console.log('Product information acquired:', data);
+        console.log('Received product data:', data);
         products.push(data); 
         socketServer.emit('productData', data); 
     });
-
-    socket.on('removeProduct', data => {   //OPCION CA
+// to Delete product
+    socket.on('DeleteProduct', data => {   
         console.log('Delete product:', data);
         products = products.filter(product => product.id !== data.id);
         socketServer.emit('productDeleted', data);
@@ -53,3 +53,7 @@ socketServer.on('connection', socketServer=>{ // OPCION CA
 });
 
 app.use("/api/products", productsRouter(socketServer));
+
+httpServer.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

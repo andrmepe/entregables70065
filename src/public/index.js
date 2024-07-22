@@ -17,12 +17,12 @@ function addProductToList(product) {
     const productItem = document.createElement('li');
     productItem.id = `product-${product.id}`;
     productItem.innerHTML = `ID: ${product.id}, Title: ${product.title}, Description: ${product.description}, Code: ${product.code}, Price: ${product.price}, Stock: ${product.stock} 
-    <button onclick="removeProduct(${product.id})">Eliminar</button>`;
+    <button onclick="DeleteProduct(${product.id})">Delete</button>`;
     productList.appendChild(productItem);
 }
 
-function removeProduct(id) {
-    socket.emit('removeProduct', { id });
+function DeleteProduct(id) {
+    socket.emit('DeleteProduct', { id });
 }
 
 socket.on('productDeleted', (data) => {
