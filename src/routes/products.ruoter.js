@@ -101,7 +101,7 @@ const setupRouter = (io) => {
                 res.status(200).json({ msg: `Product with id: ${prodId} removed successfully` });
 
                 // Emit the product removal event through Socket.IO
-                io.emit('productRemoved', { id: prodId });
+                io.emit('productDeleted', { id: prodId });
             } catch (error) {
                 res.status(500).json({ msg: 'Error removing the product', error: error.message });
             }

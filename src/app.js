@@ -48,7 +48,7 @@ socketServer.on('connection', socketServer=>{ // OPCION CA
     socket.on('removeProduct', data => {   //OPCION CA
         console.log('Delete product:', data);
         products = products.filter(product => product.id !== data.id);
-        socketServer.emit('productRemoved', data);
+        socketServer.emit('productDeleted', data);
     });
 });
 

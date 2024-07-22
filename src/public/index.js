@@ -25,7 +25,7 @@ function removeProduct(id) {
     socket.emit('removeProduct', { id });
 }
 
-socket.on('productRemoved', (data) => {
+socket.on('productDeleted', (data) => {
     const productItem = document.getElementById(`product-${data.id}`);
     if (productItem) {
         productItem.remove();
