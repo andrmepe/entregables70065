@@ -15,7 +15,7 @@ document.getElementById('productForm').addEventListener('submit', function (even
 function addProductToList(product) {
     const productList = document.getElementById('products');
     const productItem = document.createElement('li');
-    productItem.id = `product-${product.id}`;
+    productItem.id = `product: ${product.id}`;
     productItem.innerHTML = `ID: ${product.id}, Title: ${product.title}, Description: ${product.description}, Code: ${product.code}, Price: ${product.price}, Stock: ${product.stock} 
     <button onclick="DeleteProduct(${product.id})">Delete</button>`;
     productList.appendChild(productItem);
@@ -26,7 +26,7 @@ function DeleteProduct(id) {
 }
 
 socket.on('productDeleted', (data) => {
-    const productItem = document.getElementById(`product-${data.id}`);
+    const productItem = document.getElementById(`product: ${data.id}`);
     if (productItem) {
         productItem.remove();
     }
